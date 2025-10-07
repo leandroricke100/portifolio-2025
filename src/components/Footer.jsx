@@ -16,7 +16,7 @@ const Footer = () => {
     { icon: <Linkedin size={20} />, href: '#', label: 'LinkedIn' },
     { icon: <Github size={20} />, href: '#', label: 'GitHub' },
     { icon: <Instagram size={20} />, href: '#', label: 'Instagram' },
-    { icon: <Mail size={20} />, href: 'mailto:contato@leandrocodelab.com', label: 'Email' }
+    { icon: <Mail size={20} />, href: 'mailto:leandro_henrique_100@hotmail.com', label: 'Email' }
   ];
 
   return (
@@ -32,7 +32,7 @@ const Footer = () => {
             </p>
             <p className="text-white/70">
               <Mail className="inline w-4 h-4 mr-2" />
-              contato@leandrocodelab.com
+              leandro_henrique_100@hotmail.com
             </p>
           </div>
 

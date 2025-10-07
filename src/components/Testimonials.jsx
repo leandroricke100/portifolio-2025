@@ -10,7 +10,7 @@ const Testimonials = () => {
   const testimonials = [
     {
       name: 'João Silva',
-      role: 'Câmara Municipal de São João Evangelista',
+      role: 'Diretor de Marketing',
       content: 'O Leandro transformou nossa ideia em um sistema prático e bonito. Atendimento excelente e entrega dentro do prazo!',
       rating: 5
     },

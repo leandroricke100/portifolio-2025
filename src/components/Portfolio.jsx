@@ -11,8 +11,8 @@ const Portfolio = () => {
 
   const projects = [
     {
-      title: 'Gover Web',
-      description: 'Sistema para câmaras municipais com extração automática de documentos oficiais',
+      title: 'LegalDocs',
+      description: 'Sistema para gerenciamento de documentos com extração automática de documentos oficiais',
       tags: ['React', 'Node.js', 'IA', 'PDF Processing'],
       gradient: 'from-blue-600 to-blue-800'
     },
