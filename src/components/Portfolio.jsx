@@ -11,10 +11,11 @@ const Portfolio = () => {
 
   const projects = [
     {
-      title: 'LegalDocs',
-      description: 'Sistema para gerenciamento de documentos com extração automática de documentos oficiais',
-      tags: ['React', 'Node.js', 'IA', 'PDF Processing'],
-      gradient: 'from-blue-600 to-blue-800'
+      title: 'FoodSaaS',
+      description: 'Plataforma completa de delivery que conecta restaurantes e clientes',
+      tags: ['React', 'Node.js', 'IA'],
+      gradient: 'from-blue-600 to-blue-800',
+      link: 'https://foodsaas.vercel.app/'
     },
     {
       title: 'AgroMix',
@@ -37,6 +38,8 @@ const Portfolio = () => {
       duration: 3000,
     });
   };
+
+  const actionClasses = "flex items-center gap-2 text-blue-600 font-semibold hover:gap-3 transition-all";
 
   return (
     <section id="projetos" className="py-24 bg-white" ref={ref}>
@@ -82,13 +85,25 @@ const Portfolio = () => {
                   ))}
                 </div>
 
-                <button
-                  onClick={handleViewAll}
-                  className="flex items-center gap-2 text-blue-600 font-semibold hover:gap-3 transition-all"
-                >
-                  Ver detalhes
-                  <ExternalLink size={16} />
-                </button>
+                {project.link ? (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={actionClasses}
+                  >
+                    Ver detalhes
+                    <ExternalLink size={16} />
+                  </a>
+                ) : (
+                  <button
+                    onClick={handleViewAll}
+                    className={actionClasses}
+                  >
+                    Ver detalhes
+                    <ExternalLink size={16} />
+                  </button>
+                )}
               </div>
             </motion.div>
           ))}
