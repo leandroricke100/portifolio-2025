@@ -27,7 +27,8 @@ const Portfolio = () => {
       title: 'DocIA',
       description: 'Ferramenta de leitura e análise de PDFs oficiais com IA',
       tags: ['IA', 'Machine Learning', 'Python', 'React'],
-      gradient: 'from-purple-600 to-indigo-800'
+      gradient: 'from-purple-600 to-indigo-800',
+      link: 'https://extrator-pdf-eta.vercel.app/'
     }
   ];
 
@@ -70,10 +71,10 @@ const Portfolio = () => {
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
                 <h3 className="text-3xl font-bold text-white relative z-10">{project.title}</h3>
               </div>
-              
+
               <div className="p-6">
                 <p className="text-slate-600 mb-4">{project.description}</p>
-                
+
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag, tagIndex) => (
                     <span
@@ -131,4 +132,4 @@ const Portfolio = () => {
 };
 
 export default Portfolio;
-  
+
