@@ -18,10 +18,18 @@ const Portfolio = () => {
       link: 'https://foodsaas.vercel.app/'
     },
     {
-      title: 'AgroMix',
-      description: 'SaaS de formulação de ração para bovinos com relatórios em tempo real',
-      tags: ['React', 'Dashboard', 'Analytics', 'SaaS'],
-      gradient: 'from-green-600 to-emerald-800'
+      title: 'CondoFácil Landing',
+      description: 'Landing page para apresentação e venda do sistema de gestão condominial',
+      tags: ['React', 'Landing Page', 'Marketing'],
+      gradient: 'from-teal-600 to-cyan-700',
+      link: 'https://landing-condofacil.vercel.app/'
+    },
+    {
+      title: 'CondoFácil Gestão',
+      description: 'Sistema de gestão condominial com módulos completos para administradoras',
+      tags: ['Next.js', 'SaaS', 'Dashboard'],
+      gradient: 'from-emerald-600 to-green-800',
+      link: 'https://condo-facil.vercel.app/'
     },
     {
       title: 'DocIA',
@@ -132,4 +140,3 @@ const Portfolio = () => {
 };
 
 export default Portfolio;
-
