@@ -10,6 +10,7 @@ import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import { Toaster } from '@/components/ui/toaster';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Testimonials />
         <Contact />
         <Footer />
+        <WhatsAppButton />
         <Toaster />
       </div>
     </>
