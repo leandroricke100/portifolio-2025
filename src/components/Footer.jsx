@@ -13,9 +13,9 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: <Linkedin size={20} />, href: '#', label: 'LinkedIn' },
-    { icon: <Github size={20} />, href: '#', label: 'GitHub' },
-    { icon: <Instagram size={20} />, href: '#', label: 'Instagram' },
+    { icon: <Linkedin size={20} />, href: 'https://www.linkedin.com/in/leandro-henrique-dev', label: 'LinkedIn' },
+    // { icon: <Github size={20} />, href: '#', label: 'GitHub' },
+    { icon: <Instagram size={20} />, href: 'https://www.instagram.com/leandro_ricke/', label: 'Instagram' },
     { icon: <Mail size={20} />, href: 'mailto:leandro_henrique_100@hotmail.com', label: 'Email' }
   ];
 
