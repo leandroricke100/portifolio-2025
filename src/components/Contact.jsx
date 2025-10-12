@@ -29,9 +29,23 @@ const Contact = () => {
       return;
     }
 
+    const subject = `Solicitação de orçamento - ${formData.name}`;
+    const bodyLines = [
+      `Nome: ${formData.name}`,
+      `Email: ${formData.email}`,
+      `Telefone: ${formData.phone || 'Não informado'}`,
+      '',
+      'Mensagem:',
+      formData.message
+    ];
+
+    const mailtoLink = `mailto:leandro_henrique_100@hotmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+
+    window.location.href = mailtoLink;
+
     toast({
-      title: "✅ Mensagem enviada com sucesso!",
-      description: "Entrarei em contato em menos de 24h. Obrigado!",
+      title: "✉️ Preparando seu email",
+      description: "Abra o aplicativo de email para enviar a mensagem.",
       duration: 5000,
     });
 
