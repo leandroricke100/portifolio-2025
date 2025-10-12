@@ -32,6 +32,13 @@ const Portfolio = () => {
       link: 'https://condo-facil.vercel.app/'
     },
     {
+      title: 'Planeta Cell',
+      description: 'Página de serviços e venda de celulares com painel administrativo completo',
+      tags: ['Next.js', 'E-commerce', 'Painel Administrativo'],
+      gradient: 'from-amber-600 to-orange-700',
+      link: 'https://planeta-cell.vercel.app/'
+    },
+    {
       title: 'DocIA',
       description: 'Ferramenta de leitura e análise de PDFs oficiais com IA',
       tags: ['IA', 'Machine Learning', 'Python', 'React'],
