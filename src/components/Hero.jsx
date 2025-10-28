@@ -18,7 +18,7 @@ const Hero = () => {
           >
             <span className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-100 text-yellow-800 rounded-full text-sm font-semibold mb-6">
               <Sparkles size={16} />
-              Desenvolvedor Full Stack #deploy1
+              Desenvolvedor Full Stack
             </span>
           </motion.div>
 
