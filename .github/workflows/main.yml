@@ -2,13 +2,14 @@ name: Remote Build & Publish
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]   # <-- trocado de main para master
+  workflow_dispatch:          # <-- botão "Run workflow" manual
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout (apenas para ler pacote se quiser)
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: SSH into server and deploy
@@ -19,16 +20,15 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             set -e
-            cd /var/www/portfolio || mkdir -p /var/www/portfolio && cd /var/www/portfolio
+            cd /var/www/portfolio || { mkdir -p /var/www/portfolio && cd /var/www/portfolio; }
             if [ ! -d .git ]; then
               git clone https://github.com/leandroricke100/portifolio-2025.git .
             else
               git fetch --all
-              git reset --hard origin/main
+              git reset --hard origin/master
             fi
             npm ci || npm install
             npm run build
-            # publica (Vite=dist, CRA=build)
             if [ -d dist ]; then SRC=dist; else SRC=build; fi
             rsync -az --delete "$SRC"/ /var/www/leandrodev.com.br/public/
             systemctl reload nginx
