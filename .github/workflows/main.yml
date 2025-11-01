@@ -1,34 +1,42 @@
-name: Remote Build & Publish
+name: Deploy React App via SSH
 
 on:
   push:
-    branches: [ "master" ]   # <-- trocado de main para master
-  workflow_dispatch:          # <-- botão "Run workflow" manual
+    branches: [ master ]  # executa ao dar push na branch master
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      # 1️⃣ Baixa o código do repositório
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: SSH into server and deploy
+      # 2️⃣ Configura Node.js (versão 20)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # 3️⃣ Instala dependências e faz o build do projeto React
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      # 4️⃣ Conecta via SSH e atualiza o código no servidor
+      - name: Deploy to VPS
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: root
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASS }}
+          port: 22
           script: |
-            set -e
-            cd /var/www/portfolio || { mkdir -p /var/www/portfolio && cd /var/www/portfolio; }
-            if [ ! -d .git ]; then
-              git clone https://github.com/leandroricke100/portifolio-2025.git .
-            else
-              git fetch --all
-              git reset --hard origin/master
-            fi
-            npm ci || npm install
+            cd ~/htdocs/leandrodev.com.br
+            rm -rf *
+            git clone https://github.com/leandroricke100/portifolio-2025.git .
+            npm install
             npm run build
-            if [ -d dist ]; then SRC=dist; else SRC=build; fi
-            rsync -az --delete "$SRC"/ /var/www/leandrodev.com.br/public/
-            systemctl reload nginx
