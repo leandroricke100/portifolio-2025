@@ -1,15 +1,38 @@
-name: Deploy existing project on server
+name: Deploy React (Static) to CloudPanel
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master ]  # ajuste se usar "main"
+
+# Evita deploys concorrentes atropelarem um ao outro
+concurrency:
+  group: deploy-react
+  cancel-in-progress: true
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: SSH to VPS and update
+      # 1) Checkout
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2) Node + cache
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      # 3) Instala e builda (React gera "build/")
+      - name: Install deps
+        run: npm ci
+      - name: Build
+        run: npm run build
+
+      # 4) Prepara destino no servidor e limpa arquivos antigos (inclui ocultos)
+      - name: Prepare target dir
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -17,7 +40,27 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: 22
           script: |
-            cd ~/htdocs/leandrodev.com.br
-            git pull origin master
-            npm install
-            npm run build
+            mkdir -p ~/htdocs/leandrodev.com.br
+            rm -rf ~/htdocs/leandrodev.com.br/* ~/htdocs/leandrodev.com.br/.[!.]* ~/htdocs/leandrodev.com.br/..?* || true
+
+      # 5) Envia o build estático
+      - name: Upload build/ to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22
+          source: "build/*"
+          target: "~/htdocs/leandrodev.com.br/"
+
+      # 6) Log final (opcional)
+      - name: Finish
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22
+          script: |
+            echo "✅ Deploy concluído em $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
